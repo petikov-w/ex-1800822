@@ -6,10 +6,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 //const WebpackDevServer = require('webpack-dev-server');
 
 const config = {
-  entry: './src/index.js',
+  entry: {
+    app: './src/index.js'
+  },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
@@ -34,20 +36,26 @@ const config = {
         use: 'babel-loader',
         exclude: /node_modules/
       },
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     // 'vue-style-loader',
-      //     'css-loader',
-      //     'sass-loader'
-      //   ]
-      // },
       {
-        test: /\.css$/,
-        use: [ MiniCssExtractPlugin.loader,
-               'css-loader'
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          }, {
+            loader: 'sass-loader',
+            options: { sourceMap: true }
+          }
         ]
-      }
+      },
+      // {
+      //   test: /\.css$/,
+      //   use: [ MiniCssExtractPlugin.loader,
+      //          'css-loader'
+      //   ]
+      // }
 
     ]
   },

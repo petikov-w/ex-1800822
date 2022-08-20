@@ -15,12 +15,5 @@ export default {
 </script>
 
 <style >
-h1 {
-  color: blue;
-  background-color: #f5f5f5;
-}
-.title {
-  margin-top: 50px;
-  color: red;
-}
+
 </style>
